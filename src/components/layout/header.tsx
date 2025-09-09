@@ -21,12 +21,12 @@ export function Header() {
   const navigation = [
     { name: "Accueil", href: "/" },
     { name: "Fonctionnalités", href: "/#features" },
-    { name: "Comment ça marche", href: "/#how-it-works" },
+    { name: "Comment ça marche", href: "/how-it-works" },
     { name: "Tarifs", href: "/pricing" },
     { name: "Contact", href: "/contact" }
   ]
 
-  const handleUserTypeSelect = (type: 'influencer' | 'brand' | 'client') => {
+  const handleUserTypeSelect = (type: 'INFLUENCER' | 'BRAND' | 'CUSTOMER') => {
     navigate(`/register?type=${type}`)
   }
 
@@ -67,15 +67,15 @@ export function Header() {
               <DropdownMenuLabel>Choisissez votre profil</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                <DropdownMenuItem onClick={() => handleUserTypeSelect('influencer')}>
+                <DropdownMenuItem onClick={() => handleUserTypeSelect('INFLUENCER')}>
                   <UserCircle className="mr-2 h-4 w-4" />
                   <span>Je suis Influenceur</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleUserTypeSelect('brand')}>
+                <DropdownMenuItem onClick={() => handleUserTypeSelect('BRAND')}>
                   <Building className="mr-2 h-4 w-4" />
                   <span>Je suis une Marque</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleUserTypeSelect('client')}>
+                <DropdownMenuItem onClick={() => handleUserTypeSelect('CUSTOMER')}>
                   <Users className="mr-2 h-4 w-4" />
                   <span>Je suis Client</span>
                 </DropdownMenuItem>
@@ -122,7 +122,7 @@ export function Header() {
               <Button 
                 variant="outline" 
                 className="w-full justify-start"
-                onClick={() => handleUserTypeSelect('influencer')}
+                onClick={() => handleUserTypeSelect('INFLUENCER')}
               >
                 <UserCircle className="mr-2 h-4 w-4" />
                 Je suis Influenceur
@@ -130,7 +130,7 @@ export function Header() {
               <Button 
                 variant="outline" 
                 className="w-full justify-start"
-                onClick={() => handleUserTypeSelect('brand')}
+                onClick={() => handleUserTypeSelect('BRAND')}
               >
                 <Building className="mr-2 h-4 w-4" />
                 Je suis une Marque
@@ -138,7 +138,7 @@ export function Header() {
               <Button 
                 variant="outline" 
                 className="w-full justify-start"
-                onClick={() => handleUserTypeSelect('client')}
+                onClick={() => handleUserTypeSelect('CUSTOMER')}
               >
                 <Users className="mr-2 h-4 w-4" />
                 Je suis Client

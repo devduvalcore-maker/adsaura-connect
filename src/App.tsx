@@ -11,6 +11,9 @@ import Register from "./pages/auth/register";
 import InfluencerDashboard from "./pages/dashboard/influencer";
 import BrandDashboard from "./pages/dashboard/brand";
 import ClientDashboard from "./pages/dashboard/client";
+import Pricing from "./pages/Pricing";
+import Contact from "./pages/Contact";
+import HowItWorks from "./pages/HowItWorks";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +31,9 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard/influencer" element={<InfluencerDashboard />} />

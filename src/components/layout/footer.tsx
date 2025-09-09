@@ -5,15 +5,15 @@ import { Zap, Mail, MapPin, Phone, Facebook, Twitter, Instagram, Linkedin } from
 export function Footer() {
   const footerLinks = {
     "Plateforme": [
-      { name: "Comment ça marche", href: "/#how-it-works" },
+      { name: "Comment ça marche", href: "/how-it-works" },
       { name: "Fonctionnalités", href: "/#features" },
       { name: "Tarifs", href: "/pricing" },
       { name: "Sécurité", href: "/security" }
     ],
     "Pour les Utilisateurs": [
-      { name: "Influenceurs", href: "/register?type=influencer" },
-      { name: "Marques", href: "/register?type=brand" },
-      { name: "Clients", href: "/register?type=client" },
+      { name: "Influenceurs", href: "/register?type=INFLUENCER" },
+      { name: "Marques", href: "/register?type=BRAND" },
+      { name: "Clients", href: "/register?type=CUSTOMER" },
       { name: "Centre d'aide", href: "/help" }
     ],
     "Entreprise": [

@@ -10,54 +10,57 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner"
 
-type UserType = 'influencer' | 'brand' | 'client'
+type UserType = 'INFLUENCER' | 'BRAND' | 'CUSTOMER'
 
 export default function Register() {
   const [searchParams] = useSearchParams()
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [selectedType, setSelectedType] = useState<UserType>(
-    (searchParams.get('type') as UserType) || 'influencer'
+    (searchParams.get('type')?.toUpperCase() as UserType) || 'INFLUENCER'
   )
   const [formData, setFormData] = useState({
+    // CustomUser fields
     email: "",
+    username: "",
+    name: "",
+    phone_number: "",
     password: "",
     confirmPassword: "",
+    role: selectedType,
     acceptTerms: false,
-    // Common fields
-    name: "",
-    phone: "",
-    // Influencer specific
-    username: "",
+    // InfluencerProfile fields
     bio: "",
-    followersCount: "",
+    profile_picture: "",
+    followers_count: "",
     niches: "",
-    socialLinks: "",
-    // Brand specific
-    companyName: "",
+    social_media_links: "",
+    // BrandProfile fields  
+    company_name: "",
+    logo: "",
     website: "",
-    industry: "",
-    description: ""
+    description: "",
+    industry: ""
   })
   const navigate = useNavigate()
 
   const userTypes = [
     {
-      id: 'influencer' as UserType,
+      id: 'INFLUENCER' as UserType,
       title: 'Influenceur',
       description: 'Créateur de contenu',
       icon: UserCircle,
       benefits: ['Accès aux campagnes', 'Négociation des tarifs', 'Analytics avancées']
     },
     {
-      id: 'brand' as UserType,
+      id: 'BRAND' as UserType,
       title: 'Marque',
       description: 'Entreprise/Annonceur',
       icon: Building,
       benefits: ['Créer des campagnes', 'Trouver des influenceurs', 'Mesurer le ROI']
     },
     {
-      id: 'client' as UserType,
+      id: 'CUSTOMER' as UserType,
       title: 'Client',
       description: 'Consommateur',
       icon: Users,
@@ -83,7 +86,7 @@ export default function Register() {
     // Simulate registration
     setTimeout(() => {
       toast.success("Compte créé avec succès !")
-      navigate(`/dashboard/${selectedType}`)
+      navigate(`/dashboard/${selectedType.toLowerCase()}`)
       setIsLoading(false)
     }, 1500)
   }
@@ -94,34 +97,36 @@ export default function Register() {
     
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === 'checkbox' ? checked : value,
+      role: selectedType
     }))
   }
 
   const renderTypeSpecificFields = () => {
     switch (selectedType) {
-      case 'influencer':
+      case 'INFLUENCER':
         return (
           <>
             <div className="space-y-2">
-              <Label htmlFor="username">Nom d'utilisateur</Label>
-              <Input
-                id="username"
-                name="username"
-                placeholder="@votrenom"
-                value={formData.username}
+              <Label htmlFor="bio">Bio</Label>
+              <Textarea
+                id="bio"
+                name="bio"
+                placeholder="Parlez-nous de vous..."
+                value={formData.bio}
                 onChange={handleChange}
+                rows={3}
                 required
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="followersCount">Nombre d'abonnés</Label>
+              <Label htmlFor="followers_count">Nombre d'abonnés</Label>
               <Input
-                id="followersCount"
-                name="followersCount"
+                id="followers_count"
+                name="followers_count"
                 type="number"
                 placeholder="ex: 10000"
-                value={formData.followersCount}
+                value={formData.followers_count}
                 onChange={handleChange}
                 required
               />
@@ -138,29 +143,29 @@ export default function Register() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="bio">Bio</Label>
+              <Label htmlFor="social_media_links">Liens réseaux sociaux</Label>
               <Textarea
-                id="bio"
-                name="bio"
-                placeholder="Parlez-nous de vous..."
-                value={formData.bio}
+                id="social_media_links"
+                name="social_media_links"
+                placeholder="Instagram: @username, TikTok: @username..."
+                value={formData.social_media_links}
                 onChange={handleChange}
-                rows={3}
+                rows={2}
               />
             </div>
           </>
         )
 
-      case 'brand':
+      case 'BRAND':
         return (
           <>
             <div className="space-y-2">
-              <Label htmlFor="companyName">Nom de l'entreprise</Label>
+              <Label htmlFor="company_name">Nom de l'entreprise</Label>
               <Input
-                id="companyName"
-                name="companyName"
+                id="company_name"
+                name="company_name"
                 placeholder="Nom de votre entreprise"
-                value={formData.companyName}
+                value={formData.company_name}
                 onChange={handleChange}
                 required
               />
@@ -177,7 +182,7 @@ export default function Register() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="website">Site web (optionnel)</Label>
+              <Label htmlFor="website">Site web</Label>
               <Input
                 id="website"
                 name="website"
@@ -196,13 +201,14 @@ export default function Register() {
                 value={formData.description}
                 onChange={handleChange}
                 rows={3}
+                required
               />
             </div>
           </>
         )
 
-      case 'client':
-        return null // Minimal fields for clients
+      case 'CUSTOMER':
+        return null // Minimal fields for customers
 
       default:
         return null
@@ -316,13 +322,25 @@ export default function Register() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="phone">Téléphone</Label>
+                  <Label htmlFor="username">Nom d'utilisateur</Label>
                   <Input
-                    id="phone"
-                    name="phone"
+                    id="username"
+                    name="username"
+                    placeholder="@votrenom"
+                    value={formData.username}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="phone_number">Téléphone</Label>
+                  <Input
+                    id="phone_number"
+                    name="phone_number"
                     type="tel"
                     placeholder="+33 6 12 34 56 78"
-                    value={formData.phone}
+                    value={formData.phone_number}
                     onChange={handleChange}
                     required
                   />

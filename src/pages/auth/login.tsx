@@ -23,14 +23,19 @@ export default function Login() {
     e.preventDefault()
     setIsLoading(true)
 
-    // Simulate login
+    // Simulate login - in real app, this would query CustomUser table
     setTimeout(() => {
       if (formData.email && formData.password) {
+        // Simulate database lookup of CustomUser by email
+        // Would validate password hash and get user.role field
         toast.success("Connexion réussie !")
-        // Simulate redirect based on user type
-        const userType = formData.email.includes("brand") ? "brand" : 
-                        formData.email.includes("client") ? "client" : "influencer"
-        navigate(`/dashboard/${userType}`)
+        
+        // Simulate user role from database (INFLUENCER, BRAND, CUSTOMER)
+        const userRole = formData.email.includes("brand") ? "BRAND" : 
+                        formData.email.includes("client") ? "CUSTOMER" : "INFLUENCER"
+        
+        // Navigate to appropriate dashboard based on role
+        navigate(`/dashboard/${userRole.toLowerCase()}`)
       } else {
         toast.error("Veuillez remplir tous les champs")
       }

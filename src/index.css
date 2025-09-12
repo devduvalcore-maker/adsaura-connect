@@ -122,6 +122,55 @@
     animation: fade-up 0.6s ease-out;
   }
   
+  /* Geometric Background Shapes */
+  .geometric-circle {
+    @apply absolute rounded-full opacity-5;
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .geometric-square {
+    @apply absolute opacity-10 rotate-45;
+    background: linear-gradient(45deg, hsl(var(--accent)), hsl(var(--primary)));
+    animation: rotate-slow 8s linear infinite;
+  }
+  
+  .geometric-triangle {
+    @apply absolute opacity-10;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    animation: pulse-gentle 4s ease-in-out infinite;
+  }
+  
+  .geometric-hexagon {
+    @apply absolute opacity-5;
+    background: hsl(var(--secondary));
+    width: 60px;
+    height: 34.64px;
+    position: relative;
+    animation: float-reverse 7s ease-in-out infinite;
+  }
+  
+  .geometric-hexagon:before,
+  .geometric-hexagon:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+  }
+  
+  .geometric-hexagon:before {
+    bottom: 100%;
+    border-bottom: 17.32px solid hsl(var(--secondary));
+  }
+  
+  .geometric-hexagon:after {
+    top: 100%;
+    border-top: 17.32px solid hsl(var(--secondary));
+  }
+  
   @keyframes fade-up {
     from {
       opacity: 0;
@@ -130,6 +179,44 @@
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  
+  @keyframes float-reverse {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(15px);
+    }
+  }
+  
+  @keyframes rotate-slow {
+    from {
+      transform: rotate(45deg);
+    }
+    to {
+      transform: rotate(405deg);
+    }
+  }
+  
+  @keyframes pulse-gentle {
+    0%, 100% {
+      opacity: 0.1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.15;
+      transform: scale(1.05);
     }
   }
 }

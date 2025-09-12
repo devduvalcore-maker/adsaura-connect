@@ -90,6 +90,32 @@ export function HeroSection() {
       {/* Decorative elements */}
       <div className="absolute -top-24 right-0 h-96 w-96 rounded-full hero-gradient opacity-10 blur-3xl" />
       <div className="absolute -bottom-24 left-0 h-96 w-96 rounded-full hero-gradient opacity-10 blur-3xl" />
+      
+      {/* Geometric Background Shapes */}
+      <div className="geometric-circle w-32 h-32 top-20 right-20 -z-10" />
+      <div className="geometric-circle w-20 h-20 bottom-40 left-10 -z-10" style={{ animationDelay: '2s' }} />
+      <div className="geometric-circle w-24 h-24 top-1/2 right-1/4 -z-10" style={{ animationDelay: '4s' }} />
+      
+      <div className="geometric-square w-16 h-16 top-32 left-1/4 -z-10" />
+      <div className="geometric-square w-12 h-12 bottom-20 right-1/3 -z-10" style={{ animationDelay: '3s' }} />
+      
+      <div className="geometric-triangle top-1/4 left-20 -z-10" 
+           style={{ 
+             borderLeft: '15px solid transparent',
+             borderRight: '15px solid transparent', 
+             borderBottom: '26px solid hsl(var(--primary) / 0.1)',
+             animationDelay: '1s'
+           }} />
+      <div className="geometric-triangle bottom-1/3 right-20 -z-10" 
+           style={{ 
+             borderLeft: '20px solid transparent',
+             borderRight: '20px solid transparent', 
+             borderBottom: '35px solid hsl(var(--accent) / 0.1)',
+             animationDelay: '5s'
+           }} />
+      
+      <div className="geometric-hexagon top-2/3 left-1/3 -z-10" style={{ animationDelay: '1.5s' }} />
+      <div className="geometric-hexagon top-40 right-1/2 -z-10" style={{ animationDelay: '3.5s' }} />
     </section>
   )
 }

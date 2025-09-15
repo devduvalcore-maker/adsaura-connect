@@ -1,58 +1,41 @@
-import { useEffect, useRef, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { useRef } from 'react'
 
-interface UseScrollAnimationOptions {
-  threshold?: number
-  rootMargin?: string
-  triggerOnce?: boolean
+// Animation variants
+const animations = {
+  'fade-up': {
+    hidden: { opacity: 0, y: 60 },
+    visible: { opacity: 1, y: 0 }
+  },
+  'fade-down': {
+    hidden: { opacity: 0, y: -60 },
+    visible: { opacity: 1, y: 0 }
+  },
+  'fade-left': {
+    hidden: { opacity: 0, x: -60 },
+    visible: { opacity: 1, x: 0 }
+  },
+  'fade-right': {
+    hidden: { opacity: 0, x: 60 },
+    visible: { opacity: 1, x: 0 }
+  },
+  'scale-in': {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1 }
+  },
+  'slide-up': {
+    hidden: { opacity: 0, y: 100 },
+    visible: { opacity: 1, y: 0 }
+  }
 }
 
-export function useScrollAnimation(options: UseScrollAnimationOptions = {}) {
-  const [isVisible, setIsVisible] = useState(false)
-  const elementRef = useRef<HTMLDivElement>(null)
-
-  const {
-    threshold = 0.1,
-    rootMargin = '0px',
-    triggerOnce = true
-  } = options
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          if (triggerOnce && elementRef.current) {
-            observer.unobserve(elementRef.current)
-          }
-        } else if (!triggerOnce) {
-          setIsVisible(false)
-        }
-      },
-      { threshold, rootMargin }
-    )
-
-    const currentElement = elementRef.current
-    if (currentElement) {
-      observer.observe(currentElement)
-    }
-
-    return () => {
-      if (currentElement) {
-        observer.unobserve(currentElement)
-      }
-    }
-  }, [threshold, rootMargin, triggerOnce])
-
-  return { elementRef, isVisible }
-}
-
-// Helper component for easier usage
 interface ScrollAnimationWrapperProps {
   children: React.ReactNode
   className?: string
-  animation?: 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'scale-in' | 'slide-up'
+  animation?: keyof typeof animations
   delay?: number
   duration?: number
+  once?: boolean
 }
 
 export function ScrollAnimationWrapper({ 
@@ -60,21 +43,40 @@ export function ScrollAnimationWrapper({
   className = '', 
   animation = 'fade-up',
   delay = 0,
-  duration = 600
+  duration = 0.6,
+  once = true
 }: ScrollAnimationWrapperProps) {
-  const { elementRef, isVisible } = useScrollAnimation()
-  
-  const animationClass = isVisible ? `animate-${animation}` : `animate-${animation}-hidden`
-  const delayStyle = delay > 0 ? { animationDelay: `${delay}ms` } : {}
-  const durationStyle = { animationDuration: `${duration}ms` }
+  const ref = useRef(null)
+  const isInView = useInView(ref, { 
+    once,
+    amount: 0.1
+  })
 
   return (
-    <div 
-      ref={elementRef}
-      className={`${animationClass} ${className}`}
-      style={{ ...delayStyle, ...durationStyle }}
+    <motion.div
+      ref={ref}
+      className={className}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={animations[animation]}
+      transition={{
+        duration,
+        delay,
+        ease: [0.22, 1, 0.36, 1]
+      }}
     >
       {children}
-    </div>
+    </motion.div>
   )
+}
+
+// Hook for custom animations
+export function useScrollAnimation(options: { once?: boolean, amount?: number } = {}) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { 
+    once: options.once ?? true,
+    amount: options.amount ?? 0.1
+  })
+  
+  return { ref, isInView }
 }

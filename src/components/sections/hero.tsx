@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { ArrowRight, Users, Building, UserCircle, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import { motion } from "framer-motion"
 
 export function HeroSection() {
   return (
@@ -13,13 +14,23 @@ export function HeroSection() {
       <div className="container relative">
         <div className="mx-auto max-w-4xl text-center">
           {/* Badge */}
-          <div className="mb-8 inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
+          <motion.div 
+            className="mb-8 inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-medium text-primary"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
             <Sparkles className="mr-2 h-4 w-4" />
             Plateforme d'influence marketing #1
-          </div>
+          </motion.div>
 
           {/* Main heading */}
-          <h1 className="mb-6 text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl animate-fade-up">
+          <motion.h1 
+            className="mb-6 text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          >
             Connectez{" "}
             <span className="hero-gradient bg-clip-text text-transparent">
               Influenceurs
@@ -28,16 +39,26 @@ export function HeroSection() {
             <span className="hero-gradient bg-clip-text text-transparent">
               Marques
             </span>
-          </h1>
+          </motion.h1>
 
           {/* Subtitle */}
-          <p className="mx-auto mb-12 max-w-2xl text-lg text-muted-foreground sm:text-xl animate-fade-up">
+          <motion.p 
+            className="mx-auto mb-12 max-w-2xl text-lg text-muted-foreground sm:text-xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          >
             La plateforme qui révolutionne le marketing d'influence. 
             Créez des partenariats authentiques et développez votre impact digital.
-          </p>
+          </motion.p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6 animate-fade-up">
+          <motion.div 
+            className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
             <Card className="group relative overflow-hidden border-primary/20 bg-primary/5 p-1 transition-all hover:border-primary/40">
               <Button asChild size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
                 <Link to="/register?type=influencer">
@@ -67,10 +88,15 @@ export function HeroSection() {
                 </Link>
               </Button>
             </Card>
-          </div>
+          </motion.div>
 
           {/* Stats */}
-          <div className="mx-auto mt-16 grid max-w-3xl grid-cols-3 gap-8 border-t border-border pt-16">
+          <motion.div 
+            className="mx-auto mt-16 grid max-w-3xl grid-cols-3 gap-8 border-t border-border pt-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          >
             <div className="text-center">
               <div className="text-3xl font-bold text-primary">1K+</div>
               <div className="text-sm text-muted-foreground">Influenceurs</div>
@@ -83,7 +109,7 @@ export function HeroSection() {
               <div className="text-3xl font-bold text-accent">2K+</div>
               <div className="text-sm text-muted-foreground">Campagnes</div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 

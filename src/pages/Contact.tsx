@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge"
 import { toast } from "sonner"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
+import { ScrollAnimationWrapper } from "@/hooks/useScrollAnimation"
 
 export default function Contact() {
   const [isLoading, setIsLoading] = useState(false)
@@ -97,7 +98,7 @@ export default function Contact() {
         {/* Hero Section */}
         <section className="py-20 text-center">
           <div className="container">
-            <div className="max-w-3xl mx-auto space-y-6">
+            <ScrollAnimationWrapper animation="fade-up" className="max-w-3xl mx-auto space-y-6">
               <Badge variant="secondary" className="mb-4">
                 <MessageSquare className="h-4 w-4 mr-2" />
                 Nous sommes là pour vous aider
@@ -108,14 +109,14 @@ export default function Contact() {
               <p className="text-xl text-muted-foreground">
                 Une question ? Un projet ? Notre équipe est à votre écoute pour vous accompagner dans votre réussite.
               </p>
-            </div>
+            </ScrollAnimationWrapper>
           </div>
         </section>
 
         <div className="container pb-20">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Contact Methods */}
-            <div className="space-y-8">
+            <ScrollAnimationWrapper animation="fade-left" className="space-y-8">
               <div>
                 <h2 className="text-2xl font-bold mb-6">Nous contacter</h2>
                 <div className="space-y-6">
@@ -192,10 +193,10 @@ export default function Contact() {
                   </div>
                 </div>
               </Card>
-            </div>
+            </ScrollAnimationWrapper>
 
             {/* Contact Form */}
-            <div className="lg:col-span-2">
+            <ScrollAnimationWrapper animation="fade-right" className="lg:col-span-2">
               <Card>
                 <CardHeader>
                   <CardTitle className="text-2xl">Envoyez-nous un message</CardTitle>
@@ -286,7 +287,7 @@ export default function Contact() {
                   </form>
                 </CardContent>
               </Card>
-            </div>
+            </ScrollAnimationWrapper>
           </div>
         </div>
 

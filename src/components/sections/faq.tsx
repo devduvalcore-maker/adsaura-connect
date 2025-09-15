@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { ScrollAnimationWrapper } from "@/hooks/useScrollAnimation"
 
 export function FAQSection() {
   const faqs = [
@@ -35,7 +36,7 @@ export function FAQSection() {
       <div className="container">
         <div className="mx-auto max-w-3xl">
           {/* Header */}
-          <div className="text-center mb-16">
+          <ScrollAnimationWrapper animation="fade-up" className="text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
               Questions{" "}
               <span className="hero-gradient bg-clip-text text-transparent">
@@ -45,28 +46,30 @@ export function FAQSection() {
             <p className="text-lg text-muted-foreground">
               Tout ce que vous devez savoir sur AdsAura pour commencer
             </p>
-          </div>
+          </ScrollAnimationWrapper>
 
           {/* FAQ Accordion */}
-          <Accordion type="single" collapsible className="space-y-4">
-            {faqs.map((faq, index) => (
-              <AccordionItem 
-                key={index} 
-                value={`item-${index}`}
-                className="border border-border/50 rounded-lg px-6 bg-card/30 backdrop-blur-sm"
-              >
-                <AccordionTrigger className="text-left hover:no-underline py-6">
-                  <span className="text-base font-medium">{faq.question}</span>
-                </AccordionTrigger>
-                <AccordionContent className="pb-6 text-muted-foreground leading-relaxed">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <ScrollAnimationWrapper animation="fade-up" delay={200}>
+            <Accordion type="single" collapsible className="space-y-4">
+              {faqs.map((faq, index) => (
+                <AccordionItem 
+                  key={index} 
+                  value={`item-${index}`}
+                  className="border border-border/50 rounded-lg px-6 bg-card/30 backdrop-blur-sm"
+                >
+                  <AccordionTrigger className="text-left hover:no-underline py-6">
+                    <span className="text-base font-medium">{faq.question}</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-6 text-muted-foreground leading-relaxed">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </ScrollAnimationWrapper>
 
           {/* Contact CTA */}
-          <div className="mt-12 text-center">
+          <ScrollAnimationWrapper animation="fade-up" delay={400} className="mt-12 text-center">
             <p className="text-muted-foreground mb-4">
               Une autre question ? Notre équipe est là pour vous aider.
             </p>
@@ -76,7 +79,7 @@ export function FAQSection() {
             >
               Contactez-nous →
             </a>
-          </div>
+          </ScrollAnimationWrapper>
         </div>
       </div>
     </section>

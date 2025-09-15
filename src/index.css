@@ -171,10 +171,120 @@
     border-top: 17.32px solid hsl(var(--secondary));
   }
   
+  /* Scroll Animation Classes */
+  .animate-fade-up {
+    animation: fade-up 0.6s ease-out forwards;
+  }
+  
+  .animate-fade-up-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  .animate-fade-down {
+    animation: fade-down 0.6s ease-out forwards;
+  }
+  
+  .animate-fade-down-hidden {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  
+  .animate-fade-left {
+    animation: fade-left 0.6s ease-out forwards;
+  }
+  
+  .animate-fade-left-hidden {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  
+  .animate-fade-right {
+    animation: fade-right 0.6s ease-out forwards;
+  }
+  
+  .animate-fade-right-hidden {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  
+  .animate-scale-in {
+    animation: scale-in-scroll 0.6s ease-out forwards;
+  }
+  
+  .animate-scale-in-hidden {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+  }
+  
+  .animate-slide-up-hidden {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
   @keyframes fade-up {
     from {
       opacity: 0;
       transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fade-down {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fade-left {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes fade-right {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes scale-in-scroll {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
     }
     to {
       opacity: 1;

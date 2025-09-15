@@ -11,6 +11,7 @@ import {
   BarChart3
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ScrollAnimationWrapper } from "@/hooks/useScrollAnimation"
 
 export function FeaturesSection() {
   const features = [
@@ -86,7 +87,7 @@ export function FeaturesSection() {
     <section id="features" className="py-20 lg:py-32">
       <div className="container">
         {/* Header */}
-        <div className="mx-auto max-w-3xl text-center mb-16">
+        <ScrollAnimationWrapper animation="fade-up" className="mx-auto max-w-3xl text-center mb-16">
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
             Une plateforme adaptée à{" "}
             <span className="hero-gradient bg-clip-text text-transparent">
@@ -97,12 +98,17 @@ export function FeaturesSection() {
             Que vous soyez influenceur, marque ou client, AdsAura vous offre les outils parfaits 
             pour réussir dans l'écosystème du marketing d'influence.
           </p>
-        </div>
+        </ScrollAnimationWrapper>
 
         {/* Main features grid */}
         <div className="grid gap-8 md:grid-cols-3 mb-20">
           {features.map((feature, index) => (
-            <Card key={index} className="relative overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm">
+            <ScrollAnimationWrapper 
+              key={index}
+              animation="fade-up"
+              delay={index * 200}
+            >
+              <Card className="relative overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm h-full">
               <CardHeader className="text-center pb-4">
                 <div className={`mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-background border-2 ${feature.color.replace('text-', 'border-')}`}>
                   <feature.icon className={`h-8 w-8 ${feature.color}`} />
@@ -120,18 +126,26 @@ export function FeaturesSection() {
                   ))}
                 </ul>
               </CardContent>
-            </Card>
+              </Card>
+            </ScrollAnimationWrapper>
           ))}
         </div>
 
         {/* Additional features */}
         <div className="border-t border-border pt-16">
-          <h3 className="text-2xl font-bold text-center mb-12">
-            Fonctionnalités avancées
-          </h3>
+          <ScrollAnimationWrapper animation="fade-up">
+            <h3 className="text-2xl font-bold text-center mb-12">
+              Fonctionnalités avancées
+            </h3>
+          </ScrollAnimationWrapper>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {additionalFeatures.map((feature, index) => (
-              <Card key={index} className="border-border/50 bg-card/30 backdrop-blur-sm hover:bg-card/50 transition-colors">
+              <ScrollAnimationWrapper 
+                key={index}
+                animation="scale-in"
+                delay={index * 100}
+              >
+                <Card className="border-border/50 bg-card/30 backdrop-blur-sm hover:bg-card/50 transition-colors h-full">
                 <CardContent className="flex items-start space-x-4 p-6">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                     <feature.icon className="h-5 w-5 text-primary" />
@@ -141,7 +155,8 @@ export function FeaturesSection() {
                     <p className="text-sm text-muted-foreground">{feature.description}</p>
                   </div>
                 </CardContent>
-              </Card>
+                </Card>
+              </ScrollAnimationWrapper>
             ))}
           </div>
         </div>

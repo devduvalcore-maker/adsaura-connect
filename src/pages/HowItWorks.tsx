@@ -19,6 +19,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
+import { ScrollAnimationWrapper } from "@/hooks/useScrollAnimation"
 
 export default function HowItWorks() {
   const processSteps = [
@@ -132,7 +133,7 @@ export default function HowItWorks() {
         {/* Hero Section */}
         <section className="py-20 text-center">
           <div className="container">
-            <div className="max-w-3xl mx-auto space-y-6">
+            <ScrollAnimationWrapper animation="fade-up" className="max-w-3xl mx-auto space-y-6">
               <Badge variant="secondary" className="mb-4">
                 <Zap className="h-4 w-4 mr-2" />
                 Comment ça marche
@@ -144,7 +145,7 @@ export default function HowItWorks() {
               <p className="text-xl text-muted-foreground">
                 Découvrez comment AdsAura révolutionne le marketing d'influence avec une approche simple et efficace.
               </p>
-            </div>
+            </ScrollAnimationWrapper>
           </div>
         </section>
 
@@ -157,7 +158,12 @@ export default function HowItWorks() {
                 const isOdd = index % 2 === 1
                 
                 return (
-                  <div key={step.step} className={`flex items-center gap-12 ${isOdd ? 'flex-row-reverse' : ''}`}>
+                  <ScrollAnimationWrapper 
+                    key={step.step} 
+                    animation={isOdd ? "fade-left" : "fade-right"}
+                    delay={index * 200}
+                    className={`flex items-center gap-12 ${isOdd ? 'flex-row-reverse' : ''}`}
+                  >
                     <div className="flex-1">
                       <div className="max-w-lg">
                         <div className="flex items-center space-x-4 mb-6">
@@ -186,7 +192,7 @@ export default function HowItWorks() {
                         <Icon className="h-16 w-16 text-primary" />
                       </div>
                     </div>
-                  </div>
+                  </ScrollAnimationWrapper>
                 )
               })}
             </div>
@@ -205,7 +211,12 @@ export default function HowItWorks() {
               {userJourneys.map((journey, index) => {
                 const Icon = journey.icon
                 return (
-                  <Card key={journey.type} className="relative overflow-hidden">
+                  <ScrollAnimationWrapper 
+                    key={journey.type}
+                    animation="fade-up"
+                    delay={index * 200}
+                  >
+                    <Card className="relative overflow-hidden">
                     <div className={`absolute top-0 left-0 right-0 h-1 ${journey.color}`} />
                     
                     <CardHeader className="text-center">
@@ -238,7 +249,8 @@ export default function HowItWorks() {
                         </Link>
                       </Button>
                     </CardContent>
-                  </Card>
+                    </Card>
+                  </ScrollAnimationWrapper>
                 )
               })}
             </div>
@@ -257,13 +269,18 @@ export default function HowItWorks() {
               {benefits.map((benefit, index) => {
                 const Icon = benefit.icon
                 return (
-                  <div key={index} className="text-center group">
+                  <ScrollAnimationWrapper 
+                    key={index}
+                    animation="scale-in"
+                    delay={index * 150}
+                    className="text-center group"
+                  >
                     <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-primary/10 text-primary mx-auto mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
                       <Icon className="h-8 w-8" />
                     </div>
                     <h3 className="text-lg font-semibold mb-2">{benefit.title}</h3>
                     <p className="text-muted-foreground text-sm">{benefit.description}</p>
-                  </div>
+                  </ScrollAnimationWrapper>
                 )
               })}
             </div>

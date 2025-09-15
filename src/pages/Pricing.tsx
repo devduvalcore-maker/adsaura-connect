@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
+import { ScrollAnimationWrapper } from "@/hooks/useScrollAnimation"
 
 export default function Pricing() {
   const plans = {
@@ -118,7 +119,7 @@ export default function Pricing() {
         {/* Hero Section */}
         <section className="py-20 text-center">
           <div className="container">
-            <div className="max-w-3xl mx-auto space-y-6">
+            <ScrollAnimationWrapper animation="fade-up" className="max-w-3xl mx-auto space-y-6">
               <Badge variant="secondary" className="mb-4">
                 <Sparkles className="h-4 w-4 mr-2" />
                 Tarifs transparents
@@ -130,7 +131,7 @@ export default function Pricing() {
               <p className="text-xl text-muted-foreground">
                 Des tarifs adaptés à tous les profils. Commencez gratuitement et évoluez selon vos besoins.
               </p>
-            </div>
+            </ScrollAnimationWrapper>
           </div>
         </section>
 
@@ -167,12 +168,16 @@ export default function Pricing() {
               {plans[selectedTab].map((plan, index) => {
                 const Icon = plan.icon
                 return (
-                  <Card 
+                  <ScrollAnimationWrapper 
                     key={plan.name}
-                    className={`relative transition-all hover:shadow-lg ${
-                      plan.popular ? 'border-primary shadow-lg scale-105' : ''
-                    }`}
+                    animation="fade-up"
+                    delay={index * 200}
                   >
+                    <Card 
+                      className={`relative transition-all hover:shadow-lg ${
+                        plan.popular ? 'border-primary shadow-lg scale-105' : ''
+                      }`}
+                    >
                     {plan.popular && (
                       <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                         <Badge className="bg-primary text-primary-foreground">
@@ -214,7 +219,8 @@ export default function Pricing() {
                         </Link>
                       </Button>
                     </CardContent>
-                  </Card>
+                    </Card>
+                  </ScrollAnimationWrapper>
                 )
               })}
             </div>

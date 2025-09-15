@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { ScrollAnimationWrapper } from "@/hooks/useScrollAnimation"
 
 export function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -92,7 +93,7 @@ export function TestimonialsSection() {
     <section className="py-20 lg:py-32 bg-muted/20">
       <div className="container">
         {/* Header */}
-        <div className="mx-auto max-w-3xl text-center mb-16">
+        <ScrollAnimationWrapper animation="fade-up" className="mx-auto max-w-3xl text-center mb-16">
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
             Ce que disent nos{" "}
             <span className="hero-gradient bg-clip-text text-transparent">
@@ -103,10 +104,10 @@ export function TestimonialsSection() {
             Découvrez comment AdsAura transforme l'expérience du marketing d'influence 
             pour les influenceurs, les marques et les clients.
           </p>
-        </div>
+        </ScrollAnimationWrapper>
 
         {/* Carousel */}
-        <div className="relative mx-auto max-w-4xl">
+        <ScrollAnimationWrapper animation="scale-in" className="relative mx-auto max-w-4xl">
           <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
             <CardContent className="p-8">
               <div className="flex items-start justify-between mb-6">
@@ -193,7 +194,7 @@ export function TestimonialsSection() {
               <ChevronRight className="h-5 w-5" />
             </Button>
           </div>
-        </div>
+        </ScrollAnimationWrapper>
       </div>
     </section>
   )
